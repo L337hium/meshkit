@@ -55,7 +55,7 @@ get_version_failed() {
 }
 
 
-targets_url="$server/api/json/targets"
+targets_url="$server/meshkit/default/api/json/targets"
 get_target(){
 	MSG=$(wget -q "$targets_url" -O - 2> /dev/null)
         targets="$(echo $MSG | tr -d '[]" ' | sed 's/,/ /g')"
@@ -194,7 +194,7 @@ if [ "$action" == "keepconf" ]; then
         status="1"
         while [ "$status" == "1" ]; do
 
-		statusurl="$server/api/json/buildstatus?id=$id&rand=$rand"
+		statusurl="$server/meshkit/default/api/json/buildstatus?id=$id&rand=$rand"
 		json="$(wget -q "$statusurl" -O - 2> /dev/null)"
 		json_load "$json"
                 json_get_var status status
